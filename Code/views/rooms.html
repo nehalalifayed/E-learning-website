@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		 <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+		<title>available rooms </title>
+
+		<!-- Google font -->
+		<link href="https://fonts.googleapis.com/css?family=Lato:700%7CMontserrat:400,600" rel="stylesheet">
+
+		<!-- Bootstrap -->
+		<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css"/>
+
+		<!-- Font Awesome Icon -->
+		<link rel="stylesheet" href="css/font-awesome.min.css">
+
+		<!-- Custom stlylesheet -->
+		<link type="text/css" rel="stylesheet" href="css/style.css"/>
+        <link type="text/css" rel="stylesheet" href="css/style1.css"/>
+        <script type="text/javascript" src="js/jquery.min.js"></script>
+		<script type="text/javascript" src="js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="js/main.js"></script>
+		<script src='js/jquery.min.js'></script>
+
+
+		</head>
+	<body>
+
+		<!-- Header -->
+		<header id="header" class="transparent-nav">
+			<div class="container">
+
+				<div class="navbar-header">
+					<!-- Logo -->
+					<div class="navbar-brand">
+						<a class="logo" href="index.html">
+							<img src="./img/logo-alt.png" alt="logo">
+						</a>
+					</div>
+					<!-- /Logo -->
+
+					<!-- Mobile toggle -->
+					<button class="navbar-toggle">
+						<span></span>
+					</button>
+					<!-- /Mobile toggle -->
+				</div>
+
+				<!-- Navigation -->
+				<nav id="nav">
+					<ul class="main-menu nav navbar-nav navbar-right">
+						<li><a href="index.html">Home</a></li>
+						<li><a href="rooms.html">Rooms</a></li>
+						<li><a href="profile.html">My Profile</a></li>
+					</ul>
+				</nav>
+				<!-- /Navigation -->
+
+			</div>
+		</header>
+        <br> <br> <br>
+				<h3> available rooms : </h3>
+
+				<form id="dd" >
+
+				<script>
+				var data;
+				var u =0;
+				var clicked;
+				//alert('asds');
+				$(function() {
+			// var data;
+									$.ajax({
+										type: 'POST',
+										data: JSON.stringify(data),
+												contentType: 'application/json',
+																url: 'http://193.227.9.124:27183/getallrooms',
+																success: function(data) {
+																		console.log('success');
+																		console.log(JSON.stringify(data));
+																		u=data.Count;
+																		 console.log(	data.Count);
+																		 console.log(	data.Rows);
+																		 //$("#dd").empty();
+			                           		 var newHTML = "";
+
+                             for (var i =0; i<data.Count ; i++)
+														 {
+															 var oldHtml = document.getElementById("dd").innerHTML;
+															 console.log("da5al fe for loop ")
+															 newHTML= "	<div style=\"display:inline-block;\" >"
+															 +"<fieldset class=\"fieldset\"> "
+															 +"<legend class=\"legend\" >room "
+															 + (i+1)
+															 + "  </legend>"
+															 +"  <h4> name "
+															 +data.Rows[i].name
+															 +"  </h4>"
+
+                               +"    <input id=\"form" + i +"\""+"type=\"submit\" class=\"divbutton\" onclick=\"clicked "+"=" + i +"\""+  " value=\"join room \">"
+
+															 +"</fieldset>\n"+"</div>";
+
+															 if(i==data.Count-1)
+															 {
+																  console.log(i);
+																  document.getElementById("dd").innerHTML =oldHtml+ newHTML;
+															 }
+													   	else{ document.getElementById("dd").innerHTML =oldHtml+ newHTML;}
+
+														 }
+
+														 	console.log(data.Type);
+														 if(data.Type==='teacher')
+														 {
+												var ffHtml=" <br><br><form action=\"newroom.html\">"
+												+"<input type = \"submit\" id = \"btn\" value =\"add a new room ?\"></form> <br>";
+
+												document.getElementById("h").innerHTML =ffHtml;
+										         	}
+																}
+														});
+
+				});
+
+
+				 $(function() {
+				 $('#dd').submit(function( event ) {
+					 //alert( "Handler for .submit() called." );
+					 console.log("shdshdsh");
+					 console.log(clicked);
+					 event.preventDefault();
+
+
+						var data = {};
+						data.id=clicked;
+										$.ajax({
+											type: 'POST',
+											data: JSON.stringify(data),
+													contentType: 'application/json',
+																	url: 'http://193.227.9.124:27183/saveid',
+																	success: function(data) {
+																			console.log('success');
+																			console.log(JSON.stringify(data));
+																			if(data==='ok')
+																			window.location="http://193.227.9.124:27183/joinroom.html";
+
+
+
+																	}
+															})
+
+
+					});
+				});
+
+			</script>
+</form>
+<div id="h" >
+</div>
+	</body>
+</html>

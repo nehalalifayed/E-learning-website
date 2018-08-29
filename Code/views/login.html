@@ -1,0 +1,158 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>LogIn / SignUp</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script src='js/jquery.min.js'></script>
+
+<script>
+//alert('asds');
+$(function() {
+$('#signup').submit(function( event ) {
+  //alert( "Handler for .submit() called." );
+  event.preventDefault();
+	// real data //
+	var nameValue = document.getElementById("name").value;
+	var passwordvalue = document.getElementById("password").value;
+  var pass2 = document.getElementById("pass2").value;
+  var t2='no';var t1 ='no';
+  if(document.getElementById("t1").checked)
+  { t1 = document.getElementById("t1").value;}
+  if(document.getElementById("t2").checked)
+  { t2 = document.getElementById("t2").value;}
+	/////
+	var data = {};
+  var error;
+					data.name = nameValue;
+					data.password = passwordvalue;
+        	data.password2 = pass2;
+          data.type1=t1;
+          data.type2=t2;
+					$.ajax({
+						type: 'POST',
+						data: JSON.stringify(data),
+				        contentType: 'application/json',
+                        url: 'http://193.227.9.124:27183/newuser',
+                        success: function(data) {
+                            console.log('success');
+                            console.log(JSON.stringify(data));
+														if (data === 'ok')
+														{
+                                 window.location="http://193.227.9.124:27183/index.html";
+														}
+                            if(data==='Not Matching Passwords')
+                            {
+                             alert("Not Matching Passwords");
+                            }
+                            else if (data==='unvaild')
+                            {
+                              alert("Unvaild User_name");
+                            }
+
+                        }
+                    })
+});
+});
+
+
+$(function() {
+$('#signin').submit(function( event ) {
+  //alert( "Handler for .submit() called." );
+  event.preventDefault();
+	// real data //
+	var nameValue = document.getElementById("name1").value;
+	var passwordvalue = document.getElementById("password1").value;
+	/////
+	var data = {};
+
+					data.user1 = nameValue;
+					data.password1 = passwordvalue;
+
+					$.ajax({
+						type: 'POST',
+						data: JSON.stringify(data),
+				        contentType: 'application/json',
+                        url: 'http://193.227.9.124:27183/gotowebsite',
+                        success: function(data) {
+                            console.log('success');
+                            console.log(JSON.stringify(data));
+														if (data === 'ok')
+														{
+                                 window.location="http://193.227.9.124:27183/index.html";
+														}
+                            if(data ==='Password error')
+                            {
+                             alert("ERROR !!!!  UserName Or Password ");
+                            }
+
+                        }
+                    })
+});
+});
+
+</script>
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+<!--online_fonts-->
+	<link href="//fonts.googleapis.com/css?family=Sansita:400,400i,700,700i,800,800i,900,900i&amp;subset=latin-ext" rel="stylesheet">
+	<link href="//fonts.googleapis.com/css?family=Poiret+One" rel="stylesheet">
+<!--//online_fonts-->
+	<link href="css/style3.css" rel='stylesheet' type='text/css' media="all" /><!--stylesheet-->
+</head>
+<body>
+<h1> Welcome to phoenix school </h1>
+<div class="form-w3ls">
+	<div class="form-head-w3l">
+		<h2><img src="img/three.png"></h2>
+	</div>
+    <ul class="tab-group cl-effect-4">
+        <li class="tab active"><a href="#signin-agile">Sign In</a></li>
+		<li class="tab"><a href="#signup-agile">Sign Up</a></li>
+    </ul>
+    <div class="tab-content">
+        <div id="signin-agile">
+			<form action="" id="signin" method="post" >
+
+				<p class="header">User Name</p>
+				<input type="text" id="name1" name="user" placeholder="User Name" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'User Name';}" required="required">
+
+				<p class="header">Password</p>
+				<input type="password" id="password1" name="password" placeholder="Password" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Password';}" required="required">
+
+				<input type="submit" class="sign-in" value="Sign In">
+			</form>
+		</div>
+		<div id="signup-agile">
+			<form id="signup" method="post" action="/views/index.html">
+
+				<p class="header">User Name</p>
+				<input type="text" id="name" name="user" placeholder="Your Full Name (Space NotAllowed)" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Your Full Name';}" required="required">
+
+<!--
+				<p class="header">Email Address</p>
+				<input type="email" name="email" placeholder="Email" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Email';}" required="required">
+-->
+
+				<p class="header">Password</p>
+				<input type="password"  id="password" name="password" placeholder="Password" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Password';}" required="required">
+
+				<p class="header">Confirm Password</p>
+				<input type="password" id="pass2" name="password2" placeholder="Confirm Password" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Confirm Password';}" required="required">
+        <p class="header"> sign up as  </p>
+                <br>
+                <input type="radio" id="t1" name="same1"> <label> teacher </label>
+                <br> <br>
+
+				<input type="radio" id="t2" name="same2"> <label> Student </label>
+				<input type="submit" class="register" value="Sign up">
+
+		</div>
+    </div><!-- tab-content -->
+</div> <!-- /form -->
+<br> <br> <br>
+<!-- js files -->
+<script src="js/index.js"></script>
+<!-- /js files -->
+</body>
+</html>

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		 <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+		<title>new room </title>
+
+		<!-- Google font -->
+		<link href="https://fonts.googleapis.com/css?family=Lato:700%7CMontserrat:400,600" rel="stylesheet">
+
+		<!-- Bootstrap -->
+		<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css"/>
+
+		<!-- Font Awesome Icon -->
+		<link rel="stylesheet" href="css/font-awesome.min.css">
+
+		<!-- Custom stlylesheet -->
+		<link type="text/css" rel="stylesheet" href="css/style.css"/>
+        <link type="text/css" rel="stylesheet" href="css/style1.css"/>
+        <link type="text/css" rel="stylesheet" href="css/style4.css"/>
+        <script type="text/javascript" src="js/jquery.min.js"></script>
+		<script type="text/javascript" src="js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="js/main.js"></script>
+		<script src='js/jquery.min.js'></script>
+
+		<script>
+		//alert('asds');
+		$(function() {
+		$('#gg').submit(function( event ) {
+			//alert( "Handler for .submit() called." );
+			event.preventDefault();
+			// real data //
+			var txt = document.getElementById("txt1").value;
+			/////
+			var data = {};
+			var error;
+							data.txt = txt;
+
+							$.ajax({
+								type: 'POST',
+								data: JSON.stringify(data),
+										contentType: 'application/json',
+														url: 'http://193.227.9.124:27183/insertroom',
+														success: function(data) {
+																console.log('success');
+																console.log(JSON.stringify(data));
+																if (data === 'ok')
+																{
+																		 window.location="http://193.227.9.124:27183/rooms.html";
+																}
+																else if (data==='unvaild')
+																{
+																	alert("Unvaild Room_name");
+																}
+
+
+
+														}
+												})
+		});
+		});
+
+</script>
+		</head>
+
+	<body>
+
+		<!-- Header -->
+		<header id="header" class="transparent-nav">
+			<div class="container">
+
+				<div class="navbar-header">
+					<!-- Logo -->
+					<div class="navbar-brand">
+						<a class="logo" href="index.html">
+							<img src="./img/logo-alt.png" alt="logo">
+						</a>
+					</div>
+					<!-- /Logo -->
+
+					<!-- Mobile toggle -->
+					<button class="navbar-toggle">
+						<span></span>
+					</button>
+					<!-- /Mobile toggle -->
+				</div>
+
+				<!-- Navigation -->
+				<nav id="nav">
+					<ul class="main-menu nav navbar-nav navbar-right">
+						<li><a href="index.html">Home</a></li>
+						<li><a href="rooms.html">Rooms</a></li>
+						<li><a href="profile.html">My Profile</a></li>
+					</ul>
+				</nav>
+				<!-- /Navigation -->
+
+			</div>
+		</header>
+        <br> <br> <br>
+
+
+ <fieldset class="fieldset">
+  <legend class="legend">add anew room : </legend>
+     <form  class="formy" id="gg" action="" method="post">
+                <label> name :  </label>
+                <input type="text" id="txt1"  name="rr" placeholder ="maximum 20 characters .." maxlength="20">
+                <input type="submit" class="divbutton" value="Add room ">
+     </form>
+ </fieldset>
+	</body>
+</html>

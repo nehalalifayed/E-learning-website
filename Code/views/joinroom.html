@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		 <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+		<title>new room </title>
+
+		<!-- Google font -->
+		<link href="https://fonts.googleapis.com/css?family=Lato:700%7CMontserrat:400,600" rel="stylesheet">
+
+		<!-- Bootstrap -->
+		<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css"/>
+
+		<!-- Font Awesome Icon -->
+		<link rel="stylesheet" href="css/font-awesome.min.css">
+
+		<!-- Custom stlylesheet -->
+		<link type="text/css" rel="stylesheet" href="css/style.css"/>
+        <link type="text/css" rel="stylesheet" href="css/style1.css"/>
+        <link type="text/css" rel="stylesheet" href="css/style4.css"/>
+        <link type="text/css" rel="stylesheet" href="css/style5.css"/>
+				<link type="text/css" rel="stylesheet" href="css/style7.css"/>
+
+        <script type="text/javascript" src="js/jquery.min.js"></script>
+		<script type="text/javascript" src="js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="js/main.js"></script>
+		<script src='js/jquery.min.js'></script>
+		<script src='js/html2canvas.min.js'></script>
+		<script src='js/html2canvas.js'></script>
+		<script>
+		var data;
+		var roomid ;
+		var type;
+		var clicked;
+		//alert('asds');
+		$(function() {
+		// var data;
+							$.ajax({
+								type: 'POST',
+								data: JSON.stringify(data),
+										contentType: 'application/json',
+														url: 'http://193.227.9.124:27183/roomview',
+														success: function(data) {
+																console.log('success');
+																console.log(JSON.stringify(data));
+																roomid=data.id;
+																type=data.type;
+																 console.log(	roomid);
+																 console.log(	type);
+																 //$("#dd").empty();
+														document.getElementById("Nameroom").innerHTML ="Name: "+data.roomname;
+														document.getElementById("linkroom").innerHTML ="Room Link: http://193.227.9.124:27183/joinroom.html?id= "+roomid;
+													  var rHTML="<form> <label style=\"margin-left:100px;color:red;\">notebook : </label> <textarea style=\"width:70%;height:200px;color:black;background-color:#DDD;margin-left:100px;\" >";
+														if(type==="student")
+														{document.getElementById("notebook").innerHTML =rHTML;}
+
+                         var newHTML = "";
+												 for (var i =0; i<data.enrolled.length ; i++)
+												 {
+													 console.log("fe forloop"+i+data.enrolled.length);
+													 console.log(document.getElementById("ww").innerHTML);
+													 var oldHtml = document.getElementById("ww").innerHTML;
+													 console.log("da5al fe for loop ")
+													 newHTML= "<p class=\"studentname\"> <span> name :</span> " + data.enrolled[i].user_name +" </p>";
+											   	document.getElementById("ww").innerHTML =oldHtml+ newHTML;
+
+												 }
+
+														}
+												});
+
+		});
+
+</script>
+		</head>
+	<body>
+
+		<!-- Header -->
+		<header id="header" class="transparent-nav">
+			<div class="container">
+
+				<div class="navbar-header">
+					<!-- Logo -->
+					<div class="navbar-brand">
+						<a class="logo" href="index.html">
+							<img src="./img/logo-alt.png" alt="logo">
+						</a>
+					</div>
+					<!-- /Logo -->
+
+					<!-- Mobile toggle -->
+					<button class="navbar-toggle">
+						<span></span>
+					</button>
+					<!-- /Mobile toggle -->
+				</div>
+
+				<!-- Navigation -->
+				<nav id="nav">
+					<ul class="main-menu nav navbar-nav navbar-right">
+						<li><a href="index.html">Home</a></li>
+						<li><a href="rooms.html">Rooms</a></li>
+						<li><a href="profile.html">My Profile</a></li>
+					</ul>
+				</nav>
+				<!-- /Navigation -->
+
+			</div>
+		</header>
+
+
+<div class="colors" style="float:left;">
+<div class="color black"></div>
+<div class="color red"></div>
+<div class="color green"></div>
+<div class="color blue"></div>
+<div class="color yellow"></div>
+<button onclick="takeScreenShot()">Snapshot</button>
+</div>
+<div id="Ourboard" >
+<canvas  class="whiteboard" ></canvas>
+</div>
+<script src="/socket.io/socket.io.js"></script>
+<script type="text/javascript" src="/js/board.js"></script>
+        <br> <br> <br>
+				<div id= "notebook">
+			  </div>
+				<br><br>
+      <form class="formy" target="_blank" action="chat.html" >
+ <fieldset class="fieldset">
+  <legend class="legend">room info : </legend>
+     <form >
+                <label id=Nameroom> name : ay 7agah 7alian </label>
+                <label id= "linkroom"> room link :bla bla bla bla </label>
+               <input type="submit" class="divbutton"  value="start a group chat / join the group chat" name="chat">
+               <br>
+
+     </form>
+
+     </form>
+ </fieldset>
+</form>
+
+ <fieldset class="fieldset2">
+  <legend class="legend"> people enrolled in this room  </legend>
+     <form id="ww" >
+
+     </form>
+ </fieldset>
+
+       <br> <br> <br>
+
+	</body>
+</html>

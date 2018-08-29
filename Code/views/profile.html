@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		 <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+		<title> MY PROFILE</title>
+
+		<!-- Google font -->
+		<link href="https://fonts.googleapis.com/css?family=Lato:700%7CMontserrat:400,600" rel="stylesheet">
+
+		<!-- Bootstrap -->
+		<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css"/>
+
+		<!-- Font Awesome Icon -->
+		<link rel="stylesheet" href="css/font-awesome.min.css">
+
+		<!-- Custom stlylesheet -->
+		<link type="text/css" rel="stylesheet" href="css/style.css"/>
+        <link type="text/css" rel="stylesheet" href="css/style6.css"/>
+        <script type="text/javascript" src="js/jquery.min.js"></script>
+		<script type="text/javascript" src="js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="js/main.js"></script>
+		<script src='js/jquery.min.js'></script>
+		<script>
+		var data;
+		var username;
+		//alert('asds');
+		$(function() {
+		// var data;
+							$.ajax({
+								type: 'POST',
+								data: JSON.stringify(data),
+										contentType: 'application/json',
+														url: 'http://193.227.9.124:27183/profileview',
+														success: function(data) {
+																console.log('success');
+																console.log(JSON.stringify(data));
+																username=data.name;
+																 console.log(	username);
+														document.getElementById("name").innerHTML =username;
+														document.getElementById("profileimage").src =data.image;
+
+                         var newHTML = "";
+												 	$("#rooms").empty();
+												 for (var i =0; i<data.enrolled.length ; i++)
+												 {
+													 console.log("fe forloop"+i+data.enrolled.length);
+													 console.log(document.getElementById("rooms").innerHTML);
+													 var oldHtml = document.getElementById("rooms").innerHTML;
+													 newHTML= "<p>" + data.enrolled[i].room_name +"</p>";
+											   	document.getElementById("rooms").innerHTML =oldHtml+ newHTML;
+
+												 }
+
+														}
+												});
+
+		});
+
+		$(function() {
+		$('#ff').submit(function( event ) {
+			event.preventDefault();
+
+			 var data = {};
+		//	  = document.getElementById("ii").value;
+		//	= $('input[type=file]').val();
+var image=document.getElementById("ii").files[0].name;
+var x="img/"+image;
+//var x=document.getElementById("ii").value;
+			 data.image=x;
+							 $.ajax({
+								 type: 'POST',
+								 data: JSON.stringify(data),
+										 contentType: 'application/json',
+														 url: 'http://193.227.9.124:27183/updatedimage',
+														 success: function(data) {
+																 console.log('success');
+																 console.log(JSON.stringify(data));
+																	document.getElementById("profileimage").src =data;
+
+
+
+														 }
+												 })
+
+
+		 });
+	 });
+
+</script>
+		</head>
+	<body>
+
+		<!-- Header -->
+		<header id="header" class="transparent-nav">
+			<div class="container">
+
+				<div class="navbar-header">
+					<!-- Logo -->
+					<div class="navbar-brand">
+						<a class="logo" href="index.html">
+							<img src="./img/logo-alt.png" alt="logo">
+						</a>
+					</div>
+					<!-- /Logo -->
+
+					<!-- Mobile toggle -->
+					<button class="navbar-toggle">
+						<span></span>
+					</button>
+					<!-- /Mobile toggle -->
+				</div>
+
+				<!-- Navigation -->
+				<nav id="nav">
+					<ul class="main-menu nav navbar-nav navbar-right">
+						<li><a href="index.html">Home</a></li>
+						<li><a href="rooms.html">Rooms</a></li>
+						<li><a href="profile.html">My Profile</a></li>
+					</ul>
+				</nav>
+				<!-- /Navigation -->
+
+			</div>
+		</header>
+        <br> <br> <br>
+   	<div class="main">
+
+		<div class="main-info w3l">
+			<div class="main-row"><!-- main-row-one -->
+				<div class="profile-grid logo wthree">
+					<img src="img/img1.jpg" id="profileimage" alt="">
+					<h2 id="name">Mr.John </h2>
+<form id="ff">
+	<input type="file" id="ii" style="width:100px;">
+	<input type="submit" style="width:100px;">
+</form>
+
+											<h3> Rooms Enrolled In</h3>
+									  	 <div id="rooms">
+                        <p> CMP33</p> <p> CMP33</p> <p> CMP33</p> <p> CMP33</p> <p> CMP33</p> <p> CMP33</p>
+                        </div>
+				</div>
+
+
+				<div class="clear"> </div>
+			</div>
+		</div>
+
+	</div>
+
+	</body>
+</html>

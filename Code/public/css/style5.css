@@ -1,0 +1,97 @@
+body
+{
+    background-image: url('../img/robert.jpg');
+}
+label
+{
+    margin: 20px;
+    text-transform: capitalize;
+}
+canvas {
+    position: relative;
+    width: 100%;
+    border: 1px solid wheat;
+    height: 460px;
+/*    border-left: 25px solid black; */
+    padding: 5px;
+    padding-right: 140px;
+/*    margin: 25px;*/
+    border-radius: 5px;
+    cursor: crosshair;
+}
+#hex
+{
+    float: left;
+}
+.board
+{
+    width: 90%;
+    height: 500px;
+    margin-left:40px;
+    margin-bottom: -10px ;
+    margin-top: 90px;
+    border: 2px solid white;
+    border-radius: 2px;
+    background-color: white;
+}
+
+/*
+input{
+	border :5px solid white;
+	border-radius: 5px;
+    display: block;
+}
+*/
+.fieldset
+{
+  width: 500px;
+  height: 350px;
+  border: 2px solid white;
+  margin-left: 40px;
+  padding-left: 10px;
+  margin-right: 100px;
+  box-sizing: border-box;
+  margin-top: 5px;
+}
+.fieldset2
+{
+  width: 500px;
+ height: 350px;
+  border: 2px solid white;
+/*  margin : 40px;*/
+  padding-left: 10px;
+  margin-top: 10px;
+  margin-right: 20px;
+  box-sizing: border-box;
+    overflow: auto;
+}
+.legend
+{
+    margin-left: 30px;
+    color: #ffad33;
+
+}
+.divbutton
+{
+    position: relative;
+    top:40px;
+    left:-70px;
+
+}
+.studentname
+{
+    display: inline-block;
+/*    margin:20px;*/
+    margin-left:20px;
+    color:white;
+    font-size: 20px;
+}
+span
+{
+    text-transform: capitalize;
+}
+.formy
+{
+/*      display: inline-block;*/
+    float: left;
+}

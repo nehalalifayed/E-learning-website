@@ -1,0 +1,59 @@
+body
+{
+    background-image: url("../img/robert-haverly-125127.jpg");
+}
+.fieldset
+{
+  width: 1200px;
+  height: 300px;
+  border: 2px solid white;
+  margin-left: 40px;
+  padding-left: 10px;
+  margin-right: 20px;
+    
+}
+.legend
+{
+    color: white;
+    margin-left: 60px;
+    text-transform: capitalize;
+}
+.formy
+{
+    display: block;
+}
+label
+{
+    color: white;
+    font-size: 20px;
+    margin-left: 40px;
+    text-transform: capitalize;
+    display: block;
+}
+#txt1
+{
+    width: 1000px;
+    background-color: white;
+    margin-left: 40px;
+    margin-bottom: 50px;
+}
+#txt2
+{
+    width: 1000px;
+    height: 100px;
+    background-color: white;
+    margin-left: 40px;
+}
+.divbutton
+{
+    width: 80%;
+    height: 40px;
+    background-color:rgb(26, 0, 0);
+    color:white;
+    border-radius: 10px;
+    position: relative;
+    top:65px;
+    margin-left: 110px;
+    margin-bottom: 40px;
+    
+}
